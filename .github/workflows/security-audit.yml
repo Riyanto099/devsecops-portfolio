@@ -1,3 +1,4 @@
+
 name: DevSecOps Security Audit
 
 on:
@@ -42,4 +43,18 @@ jobs:
           scan-ref: k8s/
           format: table
           exit-code: '1'
+          severity: HIGH,CRITICAL
+
+  trivy-image:
+    name: Container Image Vulnerability Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Trivy image scan
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: image
+          image-ref: nginx:1.28
+          format: table
+          exit-code: '0'
           severity: HIGH,CRITICAL
