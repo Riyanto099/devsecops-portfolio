@@ -1,4 +1,4 @@
-k# Portfolio DevSecOps — Audit Keamanan Otomatis
+# Portfolio DevSecOps — Audit Keamanan Otomatis
 
 Project praktik DevSecOps yang mengintegrasikan pemeriksaan keamanan otomatis menggunakan GitHub Actions, ShellCheck, dan Trivy. Project ini berfokus pada pemeriksaan skrip Bash, konfigurasi Kubernetes, dan kerentanan pada image container.
 
