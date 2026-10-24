@@ -1,0 +1,231 @@
+2026-10-24T09:24:29+07:00	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-10-24T09:24:29+07:00	INFO	[checks-client] Using existing checks from cache	path="/home/riyanto/.cache/trivy/policy/content"
+2026-10-24T09:24:31+07:00	INFO	Detected config files	num=1
+
+Report Summary
+
+┌─────────────────┬────────────┬───────────────────┐
+│     Target      │    Type    │ Misconfigurations │
+├─────────────────┼────────────┼───────────────────┤
+│ deployment.yaml │ kubernetes │        11         │
+└─────────────────┴────────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+deployment.yaml (kubernetes)
+============================
+Tests: 98 (SUCCESSES: 87, FAILURES: 11)
+Failures: 11 (UNKNOWN: 0, LOW: 8, MEDIUM: 2, HIGH: 1, CRITICAL: 0)
+
+KSV-0011 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'resources.limits.cpu'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing CPU limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv-0011
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0015 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'resources.requests.cpu'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv-0015
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0016 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'resources.requests.memory'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv-0016
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0018 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'resources.limits.memory'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing memory limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv-0018
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0020 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'securityContext.runAsUser' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0020
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0021 (LOW): Container 'web' of Deployment 'devsecops-demo' should set 'securityContext.runAsGroup' > 10000
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv-0021
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0030 (LOW): Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+According to pod security standard 'Seccomp', the RuntimeDefault seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv-0030
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0104 (MEDIUM): container "web" of deployment "devsecops-demo" in "default" namespace should specify a seccomp profile
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+A program inside the container can bypass Seccomp protection policies.
+
+See https://avd.aquasec.com/misconfig/ksv-0104
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:16-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  16 ┌         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 │             runAsNonRoot: true
+  23 │             runAsUser: 101
+  24 └             capabilities:
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0110 (LOW): deployment devsecops-demo in default namespace should set metadata.namespace to a non-default namespace
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Checks whether a workload is running in the default namespace.
+
+See https://avd.aquasec.com/misconfig/ksv-0110
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:3-4
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   3 ┌ metadata:
+   4 └   name: devsecops-demo
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0117 (MEDIUM): deployment devsecops-demo in default namespace should not set spec.template.spec.containers.ports.containerPort to less than 1024
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+The ports which are lower than 1024 receive and transmit various sensitive and privileged data. Allowing containers to use them can bring serious implications.
+
+See https://avd.aquasec.com/misconfig/ksv-0117
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+KSV-0118 (HIGH): deployment devsecops-demo in default namespace is using the default security context, which allows root privileges
+═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Security context controls the allocation of security parameters for the pod/container/volume, ensuring the appropriate level of protection. Relying on default security context may expose vulnerabilities to potential attacks that rely on privileged access.
+
+See https://avd.aquasec.com/misconfig/ksv-0118
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ deployment.yaml:14-27
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  14 ┌     spec:
+  15 │       containers:
+  16 │         - name: web
+  17 │           image: nginx:1.28
+  18 │           ports:
+  19 │             - containerPort: 80
+  20 │           securityContext:
+  21 │             allowPrivilegeEscalation: false
+  22 └             runAsNonRoot: true
+  ..   
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
